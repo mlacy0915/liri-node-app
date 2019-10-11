@@ -1,4 +1,15 @@
+console.log (process.argv)
+
+require("dotenv").config();
+
 var axios = require("axios");
+var Spotify = require('node-spotify-api');
+var omdb = require('omdb');
+var moment = require('moment');
+var bandsintown = require('bandsintown')(codingbootcamp);
+var keys = require("./keys");
+var spotify = new Spotify(keys.spotify);
+
 
 // console.log(process.argv)
 
