@@ -40,8 +40,22 @@ var searchSpotify = function(songName) {
         }
     )
 }
-
 //band in town fuction 
+var bandsearch = function(bandsTown) {
+    if (bandsTown === undefined) { 
+        console.log("No Upcoming Shows")
+    }
+    bandsintown.search ( 
+        {
+        type: "info",
+        query:"events",
+        }
+        function(err,data) {
+            if (err) {
+                console.log("Error: " + err);
+                return;
+    )
+}
 // call to api .axios call. for loop of data. moment to fomat data
 
 
