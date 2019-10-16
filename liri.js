@@ -5,7 +5,7 @@ var axios = require("axios");
 var Spotify = require('node-spotify-api');
 var omdb = require('omdb');
 var moment = require('moment');
-// var bandsintown = require('bandsintown')(APP_ID);
+var bandsintown = require('bandsintown');
 var keys = require("./keys");
 var spotify = new Spotify(keys.spotify);
 var require = require("request");
@@ -14,13 +14,13 @@ var require = require("request");
 var pick = function(caseData, functionData) {
     switch (caseData) {
         case 'concert-this':
-            showConcertInfo(functionData);
+            concertSearch(functionData);
             break;
         case 'spotify-this-song':
-            showSongInfo(functionData);
+            searchSpotify(functionData);
             break;
         case 'movie-this':
-            showMovieInfo(functionData);
+            movieSearch(functionData);
             break;
         case 'do-what-it-says':
             showSomeInfo(functionData);
@@ -59,7 +59,7 @@ var searchSpotify = function(songName) {
     )
 }
 //band in town fuction 
-var concertThis = function(artist) {
+var concertSearch = function(artist) {
     var queryUrl = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
     axios.get (queryUrl).then(
         function(response) {
@@ -85,7 +85,7 @@ var concertThis = function(artist) {
 
 
 //movie search function,
-var movieThis = function(movieName) {
+var movieSearch = function(movieName) {
     if (movieName === undefined) {
         movieName = "Mr. Nobody"
         console.log("If you haven't watched 'Mr. Nobody,' then you should: <http://www.imdb.com/title/tt0485947/>");
@@ -115,66 +115,8 @@ var movieThis = function(movieName) {
         } )
 } 
 
-//if state similar to spotify default song = movie, 
+//if state similar to spotify default song = movie,
+
 //axios call to omdb, console.log, 
-var movieName=process.argv[2]
 
-var queryUrl = "http://www.omdbapi.com/?apikey=[codingbootcamp]&" + movieName + "&y=&plot=short&apikey=codingbootcamp"; 
-console.log(queryUrl);
-
-axios.get(queryUrl).then(
-    function(response) {
-        console.log("Release Year" + response.data.Year);
-    }
-)
-.catch(function(err) {
-    if (err.response) {
-
-      console.log("---------------Data---------------");
-      console.log(error.response.data);
-      console.log("---------------Status---------------");
-      console.log(error.response.status);
-      console.log("---------------Status---------------");
-      console.log(error.response.headers);
-    } else if (error.request) {
-        console.log(err.request);
-    } else {
-        console.log("Error", error.message);
-    }
-    console.log(err.config);
-})
 // do what it says function, set up err, switch case,
-
-
-
-
-
-
-
-// console.log(process.argv)
-
-
-
-// var string1 = process.argv[2];
-// var num2 = parseInt(process.argv[3]);
-// var num3 = parseInt(process.argv[4]);
-// var num4 = parseInt(process.argv[5]);
-// var num5 = parseInt(process.argv[6])
-
-// console.log(string1);
-// console.log(num2);
-// console.log(num3);
-// console.log(num4);
-// console.log(num5);
-
-// if (string1 === "add") {
-//     console.log(num2+num3+num4+num5);
-// }
-
-// else if (string1 === "multiply") {
-//     console.log(num2*num3*num4*num5);
-// }
-
-// else if (string1 === "divide") {
-//     console.log(num2/num3/num4/num5);
-// }
